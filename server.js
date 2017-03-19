@@ -13,6 +13,6 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, distPath, req.path));
 })
 
-app.listen(3000, function () {
-  console.log('listening on port 3000!')
+app.listen(7878, function () {
+  console.log('listening on port 7878!')
 })

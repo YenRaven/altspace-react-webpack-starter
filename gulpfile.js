@@ -11,15 +11,24 @@ function build(){
 }
 
 function html(){
-    return gulp.src('src/*.html')
+    return gulp.src(['src/*.html', 'src/*.js'])
         .pipe(gulp.dest('dist/'));
+}
+
+function assets(){
+    return gulp.src('assets/*')
+        .pipe(gulp.dest('dist/assets/'));
 }
 
 gulp.task('html', function(){
     return html();
 })
 
-gulp.task('build', ['html'], function() {
+gulp.task('assets', function(){
+    return assets();
+})
+
+gulp.task('build', ['html', 'assets'], function() {
     return build();
 });
 
@@ -29,8 +38,9 @@ gulp.task('server', shell.task([
 
 gulp.task('default', ['build'], function(){
     gulp.start('server');
-    return watch('src/*', function() {
+    return watch('src/**/*', function() {
         html();
+        assets();
         build();
     });
 });
